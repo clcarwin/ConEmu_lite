@@ -1,0 +1,21 @@
+######################################################
+# to build correct bitness user have to specify DIRBIT
+#   make -f makefile_gcc DIRBIT=32
+# or
+#   make -f makefile_gcc DIRBIT=64
+# default is 32 bit make
+#
+# define USERCPPFLAGS to pass them to compiler, example below
+#   mingw32-make -f makefile_gcc USERCPPFLAGS=-fpermissive
+######################################################
+
+
+include ../makefile_gcc_inc
+
+all:  $(TMPDIR)/../../$(RELEASEDIRNAME)/conemu-msys2-32.exe
+
+$(TMPDIR)/../../$(RELEASEDIRNAME)/conemu-msys2-32.exe: ConEmuT.rc ConEmuT.cpp
+	@cp ConEmu.xml $(TMPDIR)/../../$(RELEASEDIRNAME)/
+	@[ -f /usr/bin/gcc ] && echo "" || echo -e "\nerror: need install 'pacman -S msys/gcc'\n" && exit
+	@/usr/bin/windres  -i ConEmuT.rc -o $(TMPDIR)/ConEmuT.res.o
+	@/usr/bin/gcc $(TMPDIR)/ConEmuT.res.o ConEmuT.cpp -o $(TMPDIR)/../../$(RELEASEDIRNAME)/conemu-msys2-32.exe

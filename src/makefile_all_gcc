@@ -1,0 +1,31 @@
+ALLDIRS = ConEmu \
+          ConEmuC \
+          ConEmuCD \
+          ConEmuHk \
+          conemu-msys2-32
+
+
+all: preclean dirs $(ALLDIRS) clean
+
+build: dirs $(ALLDIRS)
+
+FICTIVE=_fictive_
+$(FICTIVE):
+
+$(ALLDIRS): $(FICTIVE)
+	@echo ===========$@$(DIRBIT)
+	@$(MAKE) -C $@ -f makefile_gcc
+
+.PHONY: preclean
+preclean:
+	@echo prebuild cleaning
+	# @rm -f ../ConEmu.exe ../ConEmuC.exe ../ConEmuHk.dll ../plugins/ConEmu/ConEmu.dll ../gcc/common/*.* ../gcc/conemu/*.* ../gcc/conemuc/*.* ../gcc/conemuhk/*.* ../gcc/ConEmuPlugin/*.* ../gcc/Plugin/*.* ../gcc/*.*
+
+.PHONY: dirs
+dirs:
+	# mkdir -p ../Release/ConEmu
+
+.PHONY: clean
+clean:
+	# @echo final cleaning
+	# @rm -rf ../gcc
