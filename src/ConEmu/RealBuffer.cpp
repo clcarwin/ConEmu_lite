@@ -3451,7 +3451,8 @@ bool CRealBuffer::OnMouse(UINT messg, WPARAM wParam, int x, int y, COORD crMouse
 	{
 		HMENU h = CreatePopupMenu();
 		AppendMenu(h, MF_STRING, 1, L"Copy"); AppendMenu(h, MF_STRING, 2, L"Paste");
-		AppendMenu(h, MF_STRING, 3, L"Refresh");
+		AppendMenu(h, MF_SEPARATOR, 0, NULL); AppendMenu(h, MF_STRING, 3, L"Select all");
+		/*AppendMenu(h, MF_STRING, 4, L"Copy all");*/ AppendMenu(h, MF_STRING, 5, L"Refresh");
 		POINT pt; GetCursorPos(&pt);
 		int cmd = gpConEmu->mp_Menu->trackPopupMenu(tmp_KeyBar, h, 
 		    TPM_LEFTALIGN|TPM_BOTTOMALIGN|TPM_RETURNCMD|TPM_LEFTBUTTON|TPM_RIGHTBUTTON, pt.x,pt.y, ghWnd, NULL);
@@ -3459,8 +3460,15 @@ bool CRealBuffer::OnMouse(UINT messg, WPARAM wParam, int x, int y, COORD crMouse
 		if(0==cmd) {/*do nothing*/};
 		if(1==cmd) if(GetSelectionCellsCount()>0) DoSelectionFinalize(true); //copy
 		if(2==cmd) mp_RCon->Paste();
-		if(3==cmd) PostMessage(ghWnd,WM_SYSCOMMAND,SC_MAXIMIZE,0);
-		if(3==cmd) PostMessage(ghWnd,WM_SYSCOMMAND,SC_RESTORE,0);
+		if(3==cmd)
+		{
+			COORD crEnd = {0,0};
+			GetCursorInfo(&crEnd, NULL); crEnd.X = GetBufferWidth()-1;
+			StartSelection(TRUE, 0, 0); ExpandSelection(crEnd.X, crEnd.Y, false);
+		}
+		// if(4==cmd) mp_RCon->DoSelectionCopy(cm_CopyAll);
+		if(5==cmd) PostMessage(ghWnd,WM_SYSCOMMAND,SC_MAXIMIZE,0);
+		if(5==cmd) PostMessage(ghWnd,WM_SYSCOMMAND,SC_RESTORE,0);
 
 		return true;
 	}
