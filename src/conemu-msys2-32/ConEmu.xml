@@ -3,7 +3,7 @@
 	<key name="ConEmu">
 		<key name=".Vanilla" modified="2017-07-19 11:52:21" build="170709">
 			<value name="StartType" type="hex" data="00"/>
-			<value name="CmdLine" type="string" data="set CHERE_INVOKING=1 &amp; set &quot;PATH=C:\msys32\usr\bin;%PATH%&quot; &amp; conemu-msys2-32.exe C:\msys32\usr\bin\bash.exe --login -c &quot;PATH=/mingw32/bin:$PATH bash&quot;"/>
+			<value name="CmdLine" type="string" data="set CHERE_INVOKING=1 &amp; set &quot;PATH=C:\msys32\usr\bin;%PATH%&quot; &amp; conemu-msys2-32.exe -new_console:p C:\msys32\usr\bin\bash.exe --login -c &quot;PATH=/mingw32/bin:$PATH bash&quot;"/>
 			<value name="StartTasksFile" type="string" data=""/>
 			<value name="StartTasksName" type="string" data="{Bash::Msys2-32}"/>
 			<value name="StartFarFolders" type="hex" data="00"/>
