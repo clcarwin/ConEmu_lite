@@ -55,10 +55,10 @@ BEGIN
             VALUE "CompanyName", ""
             VALUE "LegalCopyright", ""
             VALUE "FileDescription", CEVER_DESCRIPTION
-            VALUE "FileVersion", CONEMUVERS
+            VALUE "FileVersion", "1.0"
             VALUE "OriginalFilename", CEVER_FILENAME
             VALUE "ProductName", "ConEmu"
-            VALUE "ProductVersion", CONEMUVERS
+            VALUE "ProductVersion", "1.0"
             VALUE "SpecialBuild", CEVER_STAGE
             #ifdef CEVER_COMMENTS
             VALUE "Comments", CEVER_COMMENTS
